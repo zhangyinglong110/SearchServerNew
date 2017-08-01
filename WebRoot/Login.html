@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户登录</title>
+<style type="text/css">
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#login {
+	width: 280px; /*设置宽度*/
+	padding: 4px; /*设置内边距*/
+	height: 156px; /*设置高度*/
+	background-color: #546B51; /*设置背景颜色*/
+	margin: 0 auto;
+	position: relative; /*脱离文档流*/
+	top: 40%; /*偏移*/
+}
+
+#loginUl li { /*设置登录所用的<li>标记的样式*/
+	padding: 5px;
+}
+
+#loginUl { /*设置登录所用的<ul>标记的样式*/
+	list-style: none;
+	margin: 0px;
+}
+
+#loginTitle { /*设置登录窗口的标题样式*/
+	padding: 10px;
+	background-color: #FCFBF0;
+	color: #1B7F5D;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px;
+}
+</style>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"8123",secure:"8124"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-0" data-genuitec-path="/SearchServer/WebRoot/Login.html">
+ 	<!-- method="post" action="userLogin" id="form2" -->
+	<div id="login" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-0" data-genuitec-path="/SearchServer/WebRoot/Login.html">
+		<form name="form2">
+			<div id="loginTitle">
+				翡翠满意度后台 用户登录</b>
+			</div>
+			<div id="loginContent" style="background-color:#FFFEF9; margin:0px;">
+				<ul id="loginUl">
+					<li>用户名：<input type="text" name="username" style="width:120px">
+					</li>
+					<li>密　码：<input type="password" name="password" style="width:120px">&nbsp;
+					</li>
+					<li style="padding-left:40px;"><input id="submitBtn" name="Submit"
+						type="button" value="登录">
+						&nbsp; <input name="Submit2" type="reset" value="重置">
+					</li>
+				</ul>
+			</div>
+			<div style="background-color:#FEFEFC;height:15px;"></div>
+		</form>
+	</div>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/md5.min.js"></script>
+	<script>
+	/*onkeydown="if(event.keyCode==13){loginSubmit(this.form)}"*/
+		$(function(){
+			$("input[name=username]").keydown(function(e){
+				if(e.keyCode==13){
+					var _username = $("input[name=username]").val().trim();
+					if(_username == ""){
+						alert("请输入用户名");
+						$("input[name=username]").focus();
+						return false;
+					}
+				    $("input[name=password]").focus();
+				}
+			});
+			$("input[name=password]").keydown(function(e){
+				if(e.keyCode==13){
+					var _password = $("input[name=password]").val().trim();
+					if(_password == ""){
+						alert("请输入密码");
+						$("input[name=password]").focus();
+						return false;
+					}
+				    login();
+				}
+			});
+			function login(){
+				var _username = $("input[name=username]").val().trim();
+				var _password = $("input[name=password]").val().trim();
+				if(_username == ""){
+					alert("请输入用户名");
+					$("input[name=username]").focus();
+					return false;
+				}
+				if(_password == ""){
+					alert("请输入密码");
+					$("input[name=password]").focus();
+					return false;
+				}
+				_password = md5(_password);
+				$.ajax({
+					url: "userLogin",
+					type: "post",
+					data: {
+						username: _username,
+						password: _password
+					},
+					success: function(data){
+						if(data.code == 200){
+							window.location.href = "select/queryExport.jsp";
+						}else{
+							alert(data.msg);
+						}
+					},
+					error: function(error){
+						console.log('error');
+					}
+				});
+			}
+			$("#submitBtn").click(login);
+			
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>SearchServer</display-name>
+	<welcome-file-list>
+		<welcome-file>LoginServlet</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>ExportssServlet</servlet-name>
+		<servlet-class>com.edu.servlet.ExportssServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ExportssServlet</servlet-name>
+		<url-pattern>/ExportssServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>RecentInputServlet</servlet-name>
+		<servlet-class>com.edu.servlet.RecentInputServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RecentInputServlet</servlet-name>
+		<url-pattern>/RecentInputServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>report</servlet-name>
+		<servlet-class>com.edu.servlet.ReportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>report</servlet-name>
+		<url-pattern>/report</url-pattern>
+	</servlet-mapping>
+	<!--用来启动 log4jConfigLocation的servlet -->
+	<!-- <servlet> -->
+	<!-- <servlet-name>Log4JInitServlet</servlet-name> -->
+	<!-- <servlet-class>com.edu.servlet.Log4JInitServlet</servlet-class> -->
+	<!-- <init-param> -->
+	<!-- <param-name>log4j-properties-location</param-name> -->
+	<!-- <param-value>log4j.properties</param-value> -->
+	<!-- </init-param> -->
+	<!-- <load-on-startup>1</load-on-startup> -->
+	<!-- </servlet> -->
+
+</web-app>
